@@ -1,0 +1,143 @@
+
+
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            display: grid;
+            place-content:center;
+            background-image: url('https://www.parents.com/thmb/FmihFthdF62Ou0EoUlRI7IKeb4k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-884378360-2000-6d8b0cd7ce0c4daf96ed15c80e3bfc16.jpg');
+            background-size: 100%;
+            background-position: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .container{
+            display:grid;
+            place-content: center;
+            padding:100px;
+            background: linear-gradient(to right, rgb(228, 228, 101),rgb(97, 200, 216));
+            border-radius:30px;
+        }
+
+        #enter{
+            width:500px;
+            height: 40px;
+            border-radius:20px;
+            padding-left: 20px;
+            padding-right:20px;
+            border:none;
+        }
+
+        #btn{
+            color:black;
+            border: 2px solid red;
+            background-color: transparent;
+            height: 40px;
+            border-radius:10px;
+            transition:0.25s ease-in;
+        }
+
+        #btn:hover{
+            background-color: red;
+            transition:0.25s ease-in;
+            color:white;
+            cursor:pointer;
+        }
+
+        #result{
+            max-width: 400px;
+            text-wrap: wrap;
+            height: auto;
+            padding:20px;
+            background-color: rgb(48, 48, 48);
+            color:white;
+            border-radius: 20px;
+        }
+
+        h2{
+            text-align: center;
+            font-size: 40px;
+            font-family: "Pacifico", cursive;
+            background: linear-gradient(to right, red, rgb(99, 69, 232));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+
+    </style>
+
+    
+</head>
+
+<body>
+    
+    <div class="container">
+        <h2>Sentiment.ai</h2>
+
+    <div id="response">
+            <form>
+
+                <center><h2>Feedback for your previous state</h2></center>
+
+        <center>
+                <div id="result">
+                {{password}}
+                </div>
+        </center>
+
+        <br>
+
+        <center><button id="btn" class="speak">Speak</button></center>
+
+        
+
+    </div>
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <script>
+        // Check if browser supports speech synthesis
+if ('speechSynthesis' in window) {
+  const speakButton = document.querySelector('.speak');
+  const content = document.getElementById('result');
+
+  // Event listener for button click
+  speakButton.addEventListener('click', () => {
+    // Create a new speech synthesis object
+    const speechSynth = window.speechSynthesis;
+
+    // Get the text content of the div
+    const textToRead = content.textContent;
+
+    // Create a new SpeechSynthesisUtterance object
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+
+    const voices = speechSynthesis.getVoices();
+    const ziraVoice = voices.find(voice => voice.name === 'Microsoft David Desktop - English (United States)');
+    
+    // Set the Zira voice
+    utterance.voice = ziraVoice;
+
+    // Function to speak after a delay
+    function speakAfterDelay() {
+      // Speak the text
+      speechSynth.speak(utterance);
+    }
+
+
+    // Speak the text
+    speechSynth.speak(utterance);
+  });
+} else {
+  alert('Your browser does not support speech synthesis.');
+}
+    </script>
+    </body>
